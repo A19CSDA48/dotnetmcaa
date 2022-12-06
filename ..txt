@@ -1,0 +1,732 @@
+1.Write a c # application program to manipulate strings string str1 = "C# programing";
+
+
+string str1 = "c programing";
+string str2 = "java programing";
+Console.WriteLine(str1);
+Console.WriteLine(str2);
+int length = str1.Length;
+Console.WriteLine("length:", length);
+String joinedstring = string.Concat(str1, str2);
+Console.WriteLine("joinedstring" + joinedstring);
+Boolean result = str1.Equals(str2);
+Console.WriteLine("string str1 & str2 are equal:", result);
+
+
+
+2.Write a c# program to parse from strings to numbers or dates and times
+
+int age = int.Parse("27");
+ DateTime birthday = DateTime. Parse("4 July 1980"); 
+WriteLine($"I was born {age} years ago."); 
+WriteLine($"My birthday is {birthday}."); 
+WriteLine($"My birthday is {birthday: D}.");
+
+
+
+3.Demonstrate the patten matching with switch statement
+
+string path = @"D:\kkk";
+Console.Write("Press R for read-only or W for writeable: ");
+ConsoleKeyInfo key = Console.ReadKey();
+Console.WriteLine();
+Stream? s;
+if (key.Key == ConsoleKey.R)
+{
+s = File.Open(Path.Combine(path, "file.txt"),
+FileMode.OpenOrCreate, FileAccess.Read);
+}
+else {
+s = File.Open(Path.Combine(path, "file.txt"),
+FileMode.OpenOrCreate, FileAccess.Write);
+}
+string message;
+switch (s)
+{
+case FileStream writeableFile when s.CanWrite: message = "The stream is a file that I can write to."; break;
+case FileStream readOnlyFile: message = "The stream is a read-only file."; break;
+case MemoryStream ms: message = "The stream is a memory address."; break;
+default:
+message = "The stream is some other type.";
+break;
+case null: message = "The stream is null.";
+break;
+}
+Console.WriteLine(message);
+
+
+
+
+4.Create a c# program to catch all exception specific exception and catching with filters
+
+using static System.Console;
+Write("Enter an amount: ");
+string? amount = ReadLine();
+try
+{
+decimal amountValue = decimal.Parse(amount); }
+catch (FormatException) when (amount.Contains("$"))
+{
+WriteLine("Amounts cannot use the dollar sign!");
+}
+catch (FormatException)
+{
+WriteLine("Amounts must only contain digits!");
+}
+
+
+
+5.Write function in c# to return value
+
+string add(int a,int b)
+{
+int c = a + b;
+string s = $"{a}+{b}={c}";
+return s;
+}
+Console.WriteLine(add(2, 3));
+Console.WriteLine("enter x and y value");
+int x=int.Parse(Console.ReadLine());
+int y = int.Parse(Console.ReadLine());
+Console.WriteLine(add(x, y));
+
+
+6.Write a c# program to demonstrate the different ways of passing parameter to a method
+
+public class pro
+ { 
+public void PassingParameters(int x, ref int y, out int z) 
+{ z = 99;
+ x++;
+ y++;
+ z++; 
+} 
+public static void Main(string[] args)
+ { 
+int a = 10; 
+int b = 20; 
+int c = 30; 
+pro ob = new pro(); 
+Console.WriteLine($"Before: a = {a}, b = {b}, c = {c}"); 
+ob. PassingParameters(a, ref b, out c);
+ Console.WriteLine($"After: a = {a}, b = {b}, c = {c}");
+}
+}
+
+
+
+7.Write a C# program to demonstrate use of records
+
+record Person {
+public string Name { get; set; }
+public int Age { get; set; }
+}
+class Program {
+static void Main(string[] args)
+{
+var person = new Person
+{
+Name = "John Doe", Age = 18
+};
+person. Name = "Jane Doe";
+Console.WriteLine($"Name: {person.Name}, Age: {person.Age}");
+}
+}
+
+
+
+8 ) Print the Parts of the URL
+Program code
+
+
+using System;
+using System.Net.NetworkInformation;
+class program
+{
+static void Main(string[] args)
+{
+var resource = "http://webcode.me:80/";
+var resource2 = "http://webcode.me/index.html";
+var resource3 = "http://www.webcode.me/name=Peter&age=23";
+var path = new Uri(resource);
+var path2 = new Uri(resource2);
+var path3 = new Uri(resource3);
+Console.WriteLine(path.Port);
+Console.WriteLine(path.Host);
+Console.WriteLine(path.Authority);
+Console.WriteLine(path.LocalPath);
+Console.WriteLine(path.Scheme);
+Console.WriteLine(path2.Port);
+Console.WriteLine(path2.LocalPath);
+Console.WriteLine(path3.Authority);
+Console.WriteLine(path3.PathAndQuery);
+Console.WriteLine(path3.Query);
+Console.WriteLine(path3.AbsolutePath);
+Console.WriteLine(path3.AbsoluteUri);
+var pingSender = new Ping();
+var hostNameOrAddress = "example.com";
+Console.Clear();
+Console.WriteLine($"PING {hostNameOrAddress}");
+}
+}
+
+
+
+
+9)Display the image
+Program code
+using System;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Png;
+class program
+{
+public static void Main(string [] args)
+{
+using (Image image = Image.Load(inStream))
+{
+// Create a deep copy of the given image, resize it, and return it for chaining.
+using (Image copy = image.Clone(x => x.Resize(image.Width / 2, image.Height / 2)))
+{
+copy.Save(outStream, new PngEncoder());
+}
+}
+}
+}
+
+
+
+10. To read and write a text file
+using System;
+using System.IO;
+class Program
+{
+static void Main(string[] args)
+{
+string file = @"F:\xamarin\ex\dis_img\test.txt";
+Console.WriteLine("Reading File using StreamReader");
+if (File.Exists(file))
+{
+StreamReader Textfile = new StreamReader(file);
+string line;
+while ((line = Textfile.ReadLine()) != null)
+{
+Console.WriteLine(line);
+}
+Textfile.Close();
+Console.ReadKey();
+}
+Console.WriteLine();
+}
+}
+
+
+
+11.                                                             Delegates
+
+
+
+using System;
+public delegate void MyDelegate(string msg); //declaring a delegate
+class Program
+{
+    static void Main(string[] args)
+    {
+        MyDelegate del = ClassA.MethodA;
+        del("Hello World");
+        del = ClassB.MethodB;
+        del("Hello World");
+        del = (string msg) => Console.WriteLine("Called lambda expression: " + msg);
+        del("Hello World");
+    }
+}
+public class ClassA
+{
+    public static void MethodA(string message)
+    {
+        Console.WriteLine("Called ClassA.MethodA() with parameter: " + message);
+    }
+}
+public class ClassB
+{
+    public static void MethodB(string message)
+    {
+        Console.WriteLine("Called ClassB.MethodB() with parameter: " + message);
+    }    }
+
+
+
+
+
+12 ..interface
+
+
+
+using System;
+interface IAnimal 
+{
+  void animalSound(); // interface method (does not have a body)
+}
+
+// Pig "implements" the IAnimal interface
+class Pig : IAnimal 
+{
+  public void animalSound() 
+  {
+    // The body of animalSound() is provided here
+    Console.WriteLine("The pig says: wee wee");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args) 
+  {
+    Pig myPig = new Pig();  // Create a Pig object
+    myPig.animalSound();
+  }
+}
+
+
+
+
+
+13...............exception handling
+
+
+
+using System;
+namespace ExceptionHandlingDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int Number1, Number2, Result;
+            try
+            {
+                Console.WriteLine("Enter First Number");
+                Number1 = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Second Number");
+                Number2 = int.Parse(Console.ReadLine());
+                Result = Number1 / Number2;
+                Console.WriteLine($"Result: {Result}");
+            }
+            catch (DivideByZeroException DBZE)
+            {
+                Console.WriteLine("Second Number Should Not Be Zero");
+            }
+            catch (FormatException FE)
+            {
+                Console.WriteLine("Enter Only Integer Numbers");
+            }
+            Console.ReadKey();
+        }
+    }
+}
+
+
+14.........inheritance
+
+
+
+using System;
+namespace RectangleApplication {
+   class Rectangle {
+       //member variables
+      protected double length;
+      protected double width;
+      public Rectangle(double l, double w) {
+         length = l;
+         width = w;
+      }
+      public double GetArea() {
+         return length * width;
+      }
+      public void Display() {
+         Console.WriteLine("Length: {0}", length);
+         Console.WriteLine("Width: {0}", width);
+         Console.WriteLine("Area: {0}", GetArea());
+      }
+   } //end class Rectangle  
+   class Tabletop : Rectangle {
+      private double cost;
+      public Tabletop(double l, double w) : base(l, w) { }
+      
+      public double GetCost() {
+         double cost;
+         cost = GetArea() * 70;
+         return cost;
+      }
+      public void Display() {
+         base.Display();
+         Console.WriteLine("Cost: {0}", GetCost());
+      }
+   }
+   class ExecuteRectangle {
+      static void Main(string[] args) {
+         Tabletop t = new Tabletop(4.5, 7.5);
+         t.Display();
+         Console.ReadLine();
+      }
+   }
+}
+
+
+
+
+15.......date and timing(a)
+
+
+using System;
+class program
+{
+static void Main(string[] args)
+ {
+DateTime dob = new DateTime(2001, 12, 28, 7, 10, 24);  
+//or DateTime now = DateTime.Now;
+Console.WriteLine("Day:{0}", dob.Day);
+Console.WriteLine("Month:{0}", dob.Month);
+Console.WriteLine("Year:{0}", dob.Year);
+Console.WriteLine("Hour:{0}", dob.Hour);
+Console.WriteLine("Minute:{0}", dob.Minute);
+Console.WriteLine("Second:{0}", dob.Second);
+Console.WriteLine("Millisecond:{0}", dob.Millisecond);
+Console.WriteLine("Day of Week:{0}", dob.DayOfWeek);
+Console.WriteLine("Day of Year: {0}", dob.DayOfYear);
+Console.WriteLine("Time of Day:{0}", dob.TimeOfDay);
+}
+}
+
+
+
+(b) txt and numbers
+
+
+
+using System;
+ public class NumTextPattern{
+ static void PrintUppercaseIfString(object arg)
+{
+    if (arg is string message)
+    {
+        Console.WriteLine($"{message.ToUpper()}");
+    }
+    else
+    {
+        Console.WriteLine($"{arg} is not a string");
+    }
+}
+ static public void Main()
+{
+    string str = "Roses are Red";
+    int number = 42;
+    object o1 = str;
+    object o2 = number;
+     PrintUppercaseIfString(o1);
+    PrintUppercaseIfString(o2);
+}
+}
+
+
+
+
+16. Design Asp .Net Core MVC CRUD application using DB First approach to store Student Database
+Aim: 
+To create an ASP.NET core MVC CRUD application using DB First approach to access a student database.
+
+Procedure:
+Steps:
+Creating a database in the name StudentDB 
+1. Install Microsoft SQL Server Management Studio.
+2. Connect to the server
+3. Open Microsoft Visual Studio 2022
+	Click File->New->Project
+	Select ASP.NET Core Web App(Model-View-Controller)
+	click Next Button
+	Type Projec Name - StudentDBFirst
+	Click Next Button
+	uncheck Configure for HTTPS
+	Click Create Button
+4. Click View Menu = Click Server Explorer
+	right click Data Connections
+	Click Create New SQL Server Database
+	Select Server Name
+	Type New DataBase Name- StudentDB
+5. Creating  a table in the name Student with the following fields 
+Select the StudentDB - right click Table -> Add New Table
+Create the following table in the name student
+id		int
+sname		varchar
+dob		date
+course		varchar
+dept		varchar
+mark		int
+mobileno	varchar
+mailid		varchar
+
+6. Build the solution
+7.  Installing NuGet Packages
+Right click StudentDBFirst  in the solution explorer 
+Click Manage Nuget package
+browse - Microsoft.EntityFrameworkCore.SqlServer- install
+Microsoft.EntityFrameworkCore.Design - install
+Microsoft.EntityFrameworkCore.Tools - install
+
+8. Click appsettings.json file in the solution Explorer
+Add the following code
+"ConnectionStrings": {
+"DBConnecion":"Data Source=DESKTOP-SV7GMMR; Initial Catalog=StudentDB; User Id=sa; Password=sqlpassword;"
+},
+"AllowedHosts": "*"
+
+9. Click Tools menu - NuGet Package Manager - Package Manager Console
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=StudentDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+10. Rebuild the solution
+11. Open program.cs
+Enter the following code
+builder.Services.AddControllersWithViews();
+IConfiguration configuration=new ConfigurationBuilder()
+.AddJsonFile("appsettings.json")
+.Build();
+builder.Services.AddDbContext<StudentsDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("DBConnection")));
+var app = builder.Build();
+12. Add Controller
+Select MVC Controller with views, using Entity FrameWork
+Select Model Class and DataContext Class
+Tick all the three 
+~/Views/Shared/_Layout.cshtml  from views, shared - choose _Layout.cshtml 
+13. Run the web site.
+
+
+
+
+
+
+17. Design Asp .Net Core MVC CRUD application using DB First approach to store Patient Database
+Aim: 
+To create an ASP.NET core MVC CRUD application using DB First approach to access a Patient database.
+Procedure:
+Steps:
+Creating a database in the name PatientDB 
+1. Install Microsoft SQL Server Management Studio.
+2. Connect to the server
+3. Open Microsoft Visual Studio 2022
+	Click File->New->Project
+	Select ASP.NET Core Web App(Model-View-Controller)
+	click Next Button
+	Type Projec Name - PatientDBFirst
+	Click Next Button
+	uncheck Configure for HTTPS
+	Click Create Button
+4. Click View Menu = Click Server Explorer
+	right click Data Connections
+	Click Create New SQL Server Database
+	Select Server Name
+	Type New DataBase Name- PatientDB
+
+5. Creating  a table in the name Student with the following fields 
+Select the PatientDB - right click Table -> Add New Table
+Create the following table in the name student
+id		int
+pname		varchar
+dob		date
+illness		varchar
+doct_visit	varchar
+date_visit	date
+mobileno	varchar
+date_next	date
+
+6. Build the solution
+7.  Installing NuGet Packages
+Right click PatientDBFirst  in the solution explorer 
+Click Manage Nuget package
+browse - Microsoft.EntityFrameworkCore.SqlServer- install
+Microsoft.EntityFrameworkCore.Design - install
+Microsoft.EntityFrameworkCore.Tools - install
+8. Click appsettings.json file in the solution Explorer
+Add the following code
+"ConnectionStrings": {
+"DBConnecion":"Data Source=DESKTOP-SV7GMMR; Initial Catalog=PatientDB; User Id=sa; Password=sqlpassword;"
+},
+"AllowedHosts": "*"
+9. Click Tools menu - NuGet Package Manager - Package Manager Console
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=PatientDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+10. Rebuild the solution
+11. Open program.cs
+Enter the following code
+builder.Services.AddControllersWithViews();
+IConfiguration configuration=new ConfigurationBuilder()
+.AddJsonFile("appsettings.json")
+.Build();
+builder.Services.AddDbContext<PatientDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("DBConnection")));
+var app = builder.Build();
+
+12. Add Controller
+Select MVC Controller with views, using Entity FrameWork
+Select Model Class and DataContext Class
+Tick all the three 
+~/Views/Shared/_Layout.cshtml  from views, shared - choose _Layout.cshtml 
+13. Run the web site.
+
+
+
+
+
+
+18. Design Asp .Net Core MVC CRUD application using DB First approach to store ProductDatabase
+Aim: 
+To create an ASP.NET core MVC CRUD application using DB First approach to access a Product database.
+Procedure:
+Steps:
+Creating a database in the name ProductDB 
+1. Install Microsoft SQL Server Management Studio.
+2. Connect to the server
+3. Open Microsoft Visual Studio 2022
+	Click File->New->Project
+	Select ASP.NET Core Web App(Model-View-Controller)
+	click Next Button
+	Type Projec Name - ProductDBFirst
+	Click Next Button
+	uncheck Configure for HTTPS
+	Click Create Button
+4. Click View Menu = Click Server Explorer
+	right click Data Connections
+	Click Create New SQL Server Database
+	Select Server Name
+	Type New DataBase Name- ProductDB
+5. Creating  a table in the name Student with the following fields 
+Select the ProductDB - right click Table -> Add New Table
+Create the following table in the name student
+id		int
+pdate                  date
+pname		varchar
+pprice		int
+psupplier	varchar
+pstock		int
+prol		int
+
+6. Build the solution
+7.  Installing NuGet Packages
+Right click ProductDBFirst  in the solution explorer 
+Click Manage Nuget package
+browse - Microsoft.EntityFrameworkCore.SqlServer- install
+Microsoft.EntityFrameworkCore.Design - install
+Microsoft.EntityFrameworkCore.Tools - install
+8. Click appsettings.json file in the solution Explorer
+Add the following code
+"ConnectionStrings": {
+"DBConnecion":"Data Source=DESKTOP-SV7GMMR; Initial Catalog=ProductDB; User Id=sa; Password=sqlpassword;"
+},
+"AllowedHosts": "*"
+9. Click Tools menu - NuGet Package Manager - Package Manager Console
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=ProductDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+10. Rebuild the solution
+11. Open program.cs
+Enter the following code
+builder.Services.AddControllersWithViews();
+IConfiguration configuration=new ConfigurationBuilder()
+.AddJsonFile("appsettings.json")
+.Build();
+builder.Services.AddDbContext<ProductDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("DBConnection")));
+var app = builder.Build();
+12. Add Controller
+Select MVC Controller with views, using Entity FrameWork
+Select Model Class and DataContext Class
+Tick all the three 
+~/Views/Shared/_Layout.cshtml  from views, shared - choose _Layout.cshtml 
+13. Run the web site.
+
+
+
+
+
+
+
+
+
+19. Design Asp .Net Core MVC CRUD application using DB First approach to store Employee Database
+Aim: 
+To create an ASP.NET core MVC CRUD application using DB First approach to access a Employee database.
+Procedure:
+Steps:
+Creating a database in the name EmployeeDB 
+1. Install Microsoft SQL Server Management Studio.
+2. Connect to the server
+3. Open Microsoft Visual Studio 2022
+	Click File->New->Project
+	Select ASP.NET Core Web App(Model-View-Controller)
+	click Next Button
+	Type Project Name - EmployeeDBFirst
+	Click Next Button
+	uncheck Configure for HTTPS
+	Click Create Button
+4. Click View Menu = Click Server Explorer
+	right click Data Connections
+	Click Create New SQL Server Database
+	Select Server Name
+	Type New DataBase Name- EmployeeDB
+
+5. Creating  a table in the name Student with the following fields 
+Select the EmployeeDB - right click Table -> Add New Table
+Create the following table in the name student
+id		int
+ename		varchar
+dob		date
+desig		varchar
+dept		varchar
+sal		int
+mobileno	varchar
+mailid		varchar
+
+6. Build the solution
+7.  Installing NuGet Packages
+Right click EmployeeDBFirst  in the solution explorer 
+Click Manage Nuget package
+browse - Microsoft.EntityFrameworkCore.SqlServer- install
+Microsoft.EntityFrameworkCore.Design - install
+Microsoft.EntityFrameworkCore.Tools - install
+8. Click appsettings.json file in the solution Explorer
+Add the following code
+"ConnectionStrings": {
+"DBConnecion":"Data Source=DESKTOP-SV7GMMR; Initial Catalog= EmployeeDB; User Id=sa; Password=sqlpassword;"
+},
+"AllowedHosts": "*"
+9. Click Tools menu - NuGet Package Manager - Package Manager Console
+Scaffold-DbContext "Data Source=localhost;Initial Catalog= EmployeeDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+10. Rebuild the solution
+11. Open program.cs
+Enter the following code
+builder.Services.AddControllersWithViews();
+IConfiguration configuration=new ConfigurationBuilder()
+.AddJsonFile("appsettings.json")
+.Build();
+builder.Services.AddDbContext< EmployeeDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("DBConnection")));
+var app = builder.Build();
+12. Add Controller
+Select MVC Controller with views, using Entity FrameWork
+Select Model Class and DataContext Class
+Tick all the three 
+~/Views/Shared/_Layout.cshtml  from views, shared - choose _Layout.cshtml 
+13. Run the web site.
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
